@@ -66,10 +66,9 @@ describe('example to-do app', () => {
 
   context('with a checked task', () => {
     beforeEach(() => {
-      // We'll take the command we used above to check off an element
-      // Since we want to perform multiple tests that start with checking
-      // one element, we put it in the beforeEach hook
-      // so that it runs at the start of every test.
+      // 上で使ったコマンドで、ある要素をチェックオフしてみる
+      // 1つの要素をチェックすることから始まるテストを複数回行いたいので、
+      // 各テストの開始時に実行されるように beforeEach フックに記述します。
       cy.contains('Pay electric bill')
         .parent()
         .find('input[type=checkbox]')
@@ -77,25 +76,25 @@ describe('example to-do app', () => {
     })
 
     it('can filter for uncompleted tasks', () => {
-      // We'll click on the "active" button in order to
-      // display only incomplete items
+      // 「アクティブ」ボタンをクリックするのは
+      // 未完成の項目のみを表示する
       cy.contains('Active').click()
 
-      // After filtering, we can assert that there is only the one
-      // incomplete item in the list.
+      // フィルタリングの後、1つだけであることを主張することができます。
+      // リスト内の不完全な項目。
       cy.get('.todo-list li')
         .should('have.length', 1)
         .first()
         .should('have.text', 'Walk the dog')
 
-      // For good measure, let's also assert that the task we checked off
-      // does not exist on the page.
+      // 念のため、チェックオフしたタスクがあることも断言しておこう。
+      // ページ上に存在しない。
       cy.contains('Pay electric bill').should('not.exist')
     })
 
     it('can filter for completed tasks', () => {
-      // We can perform similar steps as the test above to ensure
-      // that only completed tasks are shown
+      // 上記のテストと同様の手順で、以下のことを確認できます。
+      // 完了したタスクのみが表示されるようにする
       cy.contains('Completed').click()
 
       cy.get('.todo-list li')
@@ -107,21 +106,21 @@ describe('example to-do app', () => {
     })
 
     it('can delete all completed tasks', () => {
-      // First, let's click the "Clear completed" button
-      // `contains` is actually serving two purposes here.
-      // First, it's ensuring that the button exists within the dom.
-      // This button only appears when at least one task is checked
-      // so this command is implicitly verifying that it does exist.
-      // Second, it selects the button so we can click it.
+      // まず、「クリア完了」ボタンをクリックしよう
+      // `contains` は、実際にはここで2つの目的を果たしています。
+      // まず、このボタンが dom の中に存在することを確認します。
+      // このボタンは、少なくとも1つのタスクがチェックされたときにのみ表示されます。
+      // したがって、このコマンドは暗黙のうちにそれが存在することを検証している。
+      // 第二に、ボタンを選択し、クリックできるようにします。
       cy.contains('Clear completed').click()
 
-      // Then we can make sure that there is only one element
-      // in the list and our element does not exist
+      // そして、要素が1つだけであることを確認することができます。
+      // リスト内に存在し、我々の要素は存在しない
       cy.get('.todo-list li')
         .should('have.length', 1)
         .should('not.have.text', 'Pay electric bill')
 
-      // Finally, make sure that the clear button no longer exists.
+      // 最後に、クリアボタンがもう存在しないことを確認する。
       cy.contains('Clear completed').should('not.exist')
     })
   })

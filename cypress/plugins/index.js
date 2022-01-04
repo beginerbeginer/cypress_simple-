@@ -1,22 +1,20 @@
 /// <reference types="cypress" />
 // ***********************************************************
-// This example plugins/index.js can be used to load plugins
-//
-// You can change the location of this file or turn off loading
-// the plugins file with the 'pluginsFile' configuration option.
-//
-// You can read more here:
+// この例では plugins/index.js を使ってプラグインをロードすることができます。
+// 'pluginsFile'設定オプションで、このファイルの場所を変更したり、プラグインファイルの読み込みをオフにすることができます。
+
+// 詳しくはこちらをご覧ください。
 // https://on.cypress.io/plugins-guide
 // ***********************************************************
 
-// This function is called when a project is opened or re-opened (e.g. due to
-// the project's config changing)
+// この関数は、プロジェクトが開かれたとき、または開き直されたとき（例えば、次のような理由で）に呼び出されます。
+// プロジェクトのコンフィグが変更された場合）
 
 /**
  * @type {Cypress.PluginConfig}
  */
 // eslint-disable-next-line no-unused-vars
 module.exports = (on, config) => {
-  // `on` is used to hook into various events Cypress emits
-  // `config` is the resolved Cypress config
+  // `on` は、Cypress が発する様々なイベントにフックするために使用されます。
+  // `config` は解決された Cypress の設定です。
 }
