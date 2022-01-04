@@ -5,30 +5,30 @@
 
 // Cypress の仕組みやテストツールの魅力についてもっと知りたい方は、スタートガイドをご覧ください： https://on.cypress.io/introduction-to-cypress
 
-describe('example to-do app', () => {
+describe('例: to-do アプリケーション', () => {
   beforeEach(() => {
     // Cypressはテストごとに白紙の状態からスタートするので、 `cy.visit()` コマンドで私たちのウェブサイトを訪問するように指示しなければなりません。
     // すべてのテストの開始時に同じURLにアクセスしたいので、`cy.visit()'コマンドを使用します。
     // 各テストの前に実行されるように、beforeEach関数にこの関数を含めます。
-    cy.visit('https://example.cypress.io/todo')
+    cy.visit('https://example.cypress.io/todo') // この URL は、Todo アプリケーションのサンプルの URL です。
   })
 
-  it('displays two todo items by default', () => {
+  it('表示可能:デフォルトで2つのTodoを表示', () => {
     // セレクタにマッチするすべての要素を取得するために `cy.get()` コマンドを使用します。
     // 次に、`should` を使って、マッチした項目が2つあることを主張します。
     // これはデフォルトの2つの項目です。
-    cy.get('.todo-list li').should('have.length', 2)
+    cy.get('.todo-list li').should('have.length', 2) //todo-listクラスのli要素が2つあることを確認
 
     // さらに進んで、デフォルトのTODOがそれぞれ正しいテキストを含んでいるかどうかをチェックすることができます。
     // first` と `last` 関数を使用して、マッチした最初と最後の要素だけを個別に取得します。
     // そして `should` でアサーションを実行します。
-    cy.get('.todo-list li').first().should('have.text', 'Pay electric bill')
-    cy.get('.todo-list li').last().should('have.text', 'Walk the dog')
+    cy.get('.todo-list li').first().should('have.text', 'Pay electric bill')  //最初のli要素にPay electric billが含まれていることを確認
+    cy.get('.todo-list li').last().should('have.text', 'Walk the dog')  //最後のli要素にWalk the dogが含まれていることを確認
   })
 
-  it('can add new todo items', () => {
+  it('追加可能:新しいTodo 2', () => {
     // アイテムテキストを再利用できるように変数に格納します
-    const newItem = 'Feed the cat'
+    const newItem = 'Feed the dog'
 
     // input 要素を取得して、 `type` コマンドを使って新しいリストアイテムを入力してみましょう。アイテムの内容を入力した後、`type`コマンドを使用します。
     // 入力内容を送信するために、Enterキーも入力する必要があります。
@@ -45,7 +45,7 @@ describe('example to-do app', () => {
       .should('have.text', newItem)
   })
 
-  it('can check off an item as completed', () => {
+  it('チェック可能:完了した項目', () => {
     // `get`コマンドを使用してセレクターで要素を取得することに加えて、` contains`コマンドを使用してその内容で要素を取得することもできます。
     // ただし、これにより、テキストを含む最下位レベルの要素である<label>が生成されます。
     // アイテムをチェックするために、domを親要素までトラバースすることにより、この<label>の<input>要素を見つけます。
@@ -64,7 +64,7 @@ describe('example to-do app', () => {
       .should('have.class', 'completed')
   })
 
-  context('with a checked task', () => {
+  context('チェックしたタスクで', () => {
     beforeEach(() => {
       // 上で使ったコマンドで、ある要素をチェックオフしてみる
       // 1つの要素をチェックすることから始まるテストを複数回行いたいので、
@@ -75,7 +75,7 @@ describe('example to-do app', () => {
         .check()
     })
 
-    it('can filter for uncompleted tasks', () => {
+    it('未完了のタスクのフィルタリングが可能', () => {
       // 「アクティブ」ボタンをクリックするのは
       // 未完成の項目のみを表示する
       cy.contains('Active').click()
@@ -92,7 +92,7 @@ describe('example to-do app', () => {
       cy.contains('Pay electric bill').should('not.exist')
     })
 
-    it('can filter for completed tasks', () => {
+    it('完了したタスクをフィルタリングすることが可能', () => {
       // 上記のテストと同様の手順で、以下のことを確認できます。
       // 完了したタスクのみが表示されるようにする
       cy.contains('Completed').click()
@@ -105,7 +105,7 @@ describe('example to-do app', () => {
       cy.contains('Walk the dog').should('not.exist')
     })
 
-    it('can delete all completed tasks', () => {
+    it('完了したタスクをすべて削除することが可能', () => {
       // まず、「クリア完了」ボタンをクリックしよう
       // `contains` は、実際にはここで2つの目的を果たしています。
       // まず、このボタンが dom の中に存在することを確認します。
